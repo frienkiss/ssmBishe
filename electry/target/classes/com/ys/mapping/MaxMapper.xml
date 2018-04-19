@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+接口名 -->
+<mapper namespace="com.ys.dao.IMaxDao">
+
+  <select id="queryDate"  resultType="com.ys.model.Max">
+	select * from CPPSP_DATA_MAX where startTime  between #{startTime} and #{endTime}
+	</select>  
+<!-- 		<select id="queryDate" parameterType="string" resultType="com.ys.model.Max">
+		select startTime from CPPSP_DATA_MAX where startTime>#{startTime}
+	</select> -->
+<!-- <select id="queryDate"  resultType="com.ys.model.Max">
+	 select startTime from CPPSP_DATA_MAX where startTime&gt;#{startTime} and startTime&lt;#{endTime}
+		</select> -->
+	<!-- 	<select id="queryDate" parameterType="string" resultType="com.ys.model.Max">
+		select startTime from CPPSP_DATA_MAX where startTime>#{startTime}
+	</select>  -->
+	<!-- select mmax,mmin,(mmax+mmin)/2.0 as mavg from cppsp_data_max -->
+</mapper>
