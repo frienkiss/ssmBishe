@@ -4,14 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--命名空间应该是对应接口的包名+接口名 -->
 <mapper namespace="com.ys.dao.IUserDao">
-
     <!-- 登陆验证 -->
     <select id="queryUserByName" parameterType="string" resultType="com.ys.model.User">
     		select * from CPPSP_USER_RIGHT where username=#{username}
     </select> 
-  
-	<!-- <select id="queryDate" parameterType="string" resultType="string">
-		selec * from CPPSP_DATE_MAX where MAXTIME>#{startTime} and MAXTIME<#{endTime}
-	</select> -->
-
+    <select id="insertUser" resultType="java.lang.Integer">
+    		insert into cppsp_user_right values(#{username},#{password},0,0,"admin")
+    </select>
+    
 </mapper>

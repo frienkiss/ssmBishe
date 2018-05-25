@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+接口名 -->
+<mapper namespace="com.ys.dao.IAlertDao">
+    <!-- 分页查询报警数据-->
+    <select id="queryAlertInfo" parameterType="java.lang.Integer"  resultType="com.ys.model.Alert">
+    		select * from CPPSP_ALERT order by alertid limit #{startNum},6
+    </select> 
+  
+    <select id="queryCount" resultType="java.lang.Integer">
+    	select count(*) from cppsp_alert union select count(*) from cppsp_alert where status=0
+    </select>
+    <select id="delRow" parameterType="java.lang.Integer" >
+    	delete from cppsp_alert where alertid=#{alertId}
+    </select>
+</mapper>

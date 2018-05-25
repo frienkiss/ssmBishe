@@ -18,8 +18,7 @@ public class UserServiceImpl implements UserService {
     public boolean login(String username, String password) {
 
         User user = Mapper.queryUserByName(username);
-        System.out.println(user);
-       // System.out.println(user.getUsername()+"    "+user.getPassword());
+
         if (user != null) {
 
             if (user.getUsername().equals(username) && user.getPassword().equals(password))
@@ -28,6 +27,17 @@ public class UserServiceImpl implements UserService {
         }
         return false;
 
+    }
+    //注册
+    public boolean Register(String username,String password) {
+    		Mapper.insertUser(username, password);
+    		User user=Mapper.queryUserByName(username);
+    		System.out.println(user.getUsername()+"   is registered");
+    		if(user!=null) {
+    			return true;
+    		}else {
+    			return false;
+    		}
     }
     
 

@@ -1,7 +1,7 @@
 <%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set value="${pageContext.request.contextPath}" var="path" scope="page"/> --%>
    
-<%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
+<%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"  %> 
 <%String path = request.getContextPath();  
 //http://localhost:8080/项目名/   %>
 <!DOCTYPE html>
@@ -16,8 +16,9 @@
 	body{color:#fff;  font-size:14px;}
 	.wrap1{position:absolute; top:0; right:0; bottom:0; left:0; margin:auto }
 	.main_content{
-		background:url("<%=path %>/static/images/main_bg.png") repeat;
-	 margin-left:auto; margin-right:auto; text-align:left; float:none; border-radius:8px;}
+		background:url("<%=path %>/static/images/main_bg.png") repeat; text-align:left; float:none; border-radius:8px;
+		margin:0 auto;
+	}
 	
 	.form-group{position:relative;}
 	
@@ -67,20 +68,26 @@
                         </label>
                     </div>
                     <button style="submit" class="login_btn" name="submit" type="submit">登 录</button>
+           
                </form>
+                        <button class="reg">注册</button>
         </div><!--row end-->
     </div><!--container end-->
-    <script src="<%=path %>/static/js/jquery-1.12.4.min.js"></script>
+    <script src="<%=path %>/static/scripts/jquery-1.12.4.min.js"></script>
       <script>
-      /*	$.ajax({
-      		url:'/loginSure',
-      		data:{'username':$("#username"),'password':$("#password")},
-      		datatype:'json',
-      		type;'post',
-      		success:function(msg){
-      			if()
-      		}
-      	}) */
+      $(".reg").on("click",function(){
+    	   	$.ajax({
+          		url:'user/Register',
+          		data:{'username':$("#username").val(),'password':$("#password").val()},
+          		//datatype:'json',
+          		type:'post',
+          		success:function(msg){
+          			console.log(msg);
+          		}
+          	})
+      })
+    
+
       </script>     
 </body>
 </html>

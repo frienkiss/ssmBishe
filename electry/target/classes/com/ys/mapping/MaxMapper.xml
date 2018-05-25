@@ -4,18 +4,33 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--命名空间应该是对应接口的包名+接口名 -->
 <mapper namespace="com.ys.dao.IMaxDao">
+<!-- 通配符来进行关键字查询 -->
 
-  <select id="queryDate"  resultType="com.ys.model.Max">
-	select * from CPPSP_DATA_MAX where startTime  between #{startTime} and #{endTime}
-	</select>  
-<!-- 		<select id="queryDate" parameterType="string" resultType="com.ys.model.Max">
-		select startTime from CPPSP_DATA_MAX where startTime>#{startTime}
-	</select> -->
-<!-- <select id="queryDate"  resultType="com.ys.model.Max">
-	 select startTime from CPPSP_DATA_MAX where startTime&gt;#{startTime} and startTime&lt;#{endTime}
-		</select> -->
-	<!-- 	<select id="queryDate" parameterType="string" resultType="com.ys.model.Max">
-		select startTime from CPPSP_DATA_MAX where startTime>#{startTime}
-	</select>  -->
-	<!-- select mmax,mmin,(mmax+mmin)/2.0 as mavg from cppsp_data_max -->
+	 <select id="queryDate2" parameterType="string" resultType="com.ys.model.Max">
+		select * from CPPSP_DATA_MAX where mdate&gt;= #{startime} order by starttime desc
+	</select> 
+	<select id="queryTotalData" resultType="com.ys.model.Max">
+		select pvalue from ppsp_data_power where pdate="2018-04-10" union select sum(pvalue) from ppsp_data_power where date_format(pdate,"%Y%M")=
+		date_format(curdate(),"%Y%M") 
+	</select>
+
+	<select id="queryDate"  resultType="com.ys.model.Max">
+	 	select * from CPPSP_DATA_MAX where mdate&gt;= #{startTime} and startTime&lt;#{endTime} order by starttime desc 
+	</select> 
+	<select id="queryDate4"  resultType="com.ys.model.Max">
+	<!--union后面用（）起来，不然order by 会报错，不加括号也不加order by不报错  -->
+	<!-- 查月份中能耗最大的三个值，以及其对应的监测点 -->
+select seename from cppsp_info_monitor where seeid in (select seeid from ppsp_data_power where pvalue in 
+	 (select t.pvalue from (select * from ppsp_data_power where date_format(pdate,"%Y%M")=date_format(#{selectDate},"%Y%M") order by pvalue desc limit 0,3) as t) )
+	 union 
+	 (select pvalue from ppsp_data_power where date_format(pdate,"%Y%M")=date_format(#{selectDate},"%Y%M") order by pvalue desc limit 0,3)
+	 
+	</select> 
+	<select id="queryPowerByDate" parameterType="string" resultType="com.ys.model.Max">
+		select pvalue from ppsp_data_power where pdate=#{selectDate}
+	</select>
+	<select id="queryDate3"  resultType="com.ys.model.Power">
+	 	select pvalue,pdate from ppsp_data_power where pdate&gt;= #{startTime} and pdate&lt;#{endTime} order by pdate desc 
+	</select> 
+
 </mapper>

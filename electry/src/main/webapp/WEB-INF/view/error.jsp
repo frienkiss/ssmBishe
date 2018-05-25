@@ -14,4 +14,9 @@
 <br>
 
 </body>
+<script>
+window.onload=function(){
+	window.location.href="../index.jsp";
+}
+</script>
 </html>

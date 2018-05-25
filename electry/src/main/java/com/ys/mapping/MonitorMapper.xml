@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+接口名 -->
+<mapper namespace="com.ys.dao.IMonitorDao">
+<!-- 监测点id查询监测点信息-->
+    <select id="queryMonitorById" parameterType="java.lang.Integer" resultType="com.ys.model.Monitor">
+    		select * from CPPSP_INFO_MONITOR where Seeid= #{seeId}
+    </select> 
+    <!-- 监测点id查询负荷信息-->
+     <select id="queryMonitorById2" parameterType="java.lang.Integer" resultType="com.ys.model.Monitor">
+    		select * from  PPSP_DATA_POWER where SeeId=( select seeId from CPPSP_INFO_MONITOR where Seeid like #{seeId})
+    </select> 
+    <!-- 监测点名称查询 -->
+    <select id="queryMonitorByName" parameterType="string" resultType="com.ys.model.Monitor">
+    		select * from  PPSP_DATA_POWER where SeeId=( select seeId from CPPSP_INFO_MONITOR where SeeName like #{seeName})
+    </select> 
+    <!-- 查询子节点 -->
+    <select id="queryChildrenMonitor" parameterType="java.lang.Integer" resultType="com.ys.model.Monitor">
+    		select * from cppsp_info_monitor where upseeid=#{upseeid} 
+    </select>
+<!-- 所有监测点 -->
+	<select id="queryAllMonitor" resultType="com.ys.model.Monitor">
+		select * from CPPSP_INFO_MONITOR
+	</select>
+
+</mapper>

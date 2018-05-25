@@ -5,18 +5,23 @@ package com.ys.model;
  *
  */
 public class Max {
-	private int TID;
+	private String  seename;
 	private String MDATE;
 	private double MMAX;
 	private String startTime;
-
+	private int pvalue;
+	private int  pvalueMonSub;
+	private String PDATE;
 	private double MMIN;
 	private String endTime;
 	
-	public int getTID() {
-		return TID;
+	public String getSeeName() {
+		return seename;
 	}
 	public String getMDATE() {
+		return MDATE;
+	}
+	public String getPDATE() {
 		return MDATE;
 	}
 	public double getMMAX() {
@@ -33,11 +38,21 @@ public class Max {
 	public String getEndTime() {
 		return endTime;
 	}
-	public void setTID(int TID) {
-		this.TID=TID;
+	public int getPvalue() {
+		return pvalue;
+	}
+	public int getPvalueMonSub() {
+		return pvalueMonSub;
+	}
+	
+	public void setSeeName(String seeName) {
+		this.seename=seeName;
 	}
 	public void setMDATE(String MDATE) {
 		this.MDATE=MDATE;
+	}
+	public void setPDATE(String PDATE) {
+		this.PDATE=PDATE;
 	}
 	public void setMMAX(double MMAX) {
 		this.MMAX=MMAX;

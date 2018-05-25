@@ -11,5 +11,6 @@ import org.springframework.stereotype.Service;
 public interface UserService {
     
      public boolean login(String username,String password);
+     public boolean Register(String username,String password);
    
 }
